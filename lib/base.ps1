@@ -1,5 +1,5 @@
 ﻿
-$env:PSModulePath     = $PWD.ToString()+"lib"
+$env:PSModulePath     = $PWD.ToString()+"\lib"
 #$HOME                = $PWD.ToString()+"\home"
 remove-variable -force HOME
 $HOME                 = $PWD.ToString()+($PWD.Path.EndsWith('\') ? "" : "\")+"home"
