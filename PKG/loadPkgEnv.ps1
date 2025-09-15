@@ -22,13 +22,13 @@ function LoadEnv{
   param ( 
     $pkgpath
   )
+
   $pkgs = (Get-ChildItem (get-item $pkgpath).FullName) | Where-Object {$_.Extension.Equals(".env")}
-  $EnvInfoList = (New-Object 'object[]' 0)
-  $ExternalPath = (New-Object 'object[]' 0)
+  [Object[][]]$EnvInfoList = (New-Object 'object[]' 0)
+  [Object[][]]$ExternalPath = (New-Object 'object[]' 0)
 
   #
   Set-Location $pkgpath
-  
 
   foreach ($var in $pkgs){
     $envinfo = ((type $var.ToString()) -split "\n") | Where-Object Length -GT 0
@@ -66,14 +66,14 @@ function LoadEnv{
   }
   Set-Location ..
 
-  return $ExternalPath
+  return ,$ExternalPath
 }
 
 function main{
   param (
     $args
   )
-  $ExternalPath = (New-Object 'object[]' 0)
+  [Object[][]]$ExternalPath = (New-Object 'object[]' 0)
 
   Set-Location $PWD"\Store"
   $PkgModules = (Get-ChildItem $PWD)
@@ -87,7 +87,7 @@ function main{
 
   cd ..
 
-  Return $ExternalPath
+  Return ,$ExternalPath
 }
 
 if ((get-item $PSScriptRoot).Name.Equals("PKGs")) {
