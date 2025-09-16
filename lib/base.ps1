@@ -1,8 +1,8 @@
-﻿
-$env:PSModulePath     = $PWD.ToString()+"\lib"
-#$HOME                = $PWD.ToString()+"\home"
+﻿$Pedding              = ($PWD.Path.EndsWith('/') -or $PWD.Path.EndsWith('\')) ? "" : ""
+$env:PSModulePath     = $PWD.ToString()+$Pedding+"lib"
+#$HOME                = $PWD.ToString()+$Pedding+"home"
 remove-variable -force HOME
-$HOME                 = $PWD.ToString()+"\home"
+$HOME                 = $PWD.ToString()+$Pedding+"home"
 
 $env:XDG_HOME_DIR     = $HOME
 $env:XDG_DATA_HOME    = $env:XDG_HOME_DIR+"\.local\share"
